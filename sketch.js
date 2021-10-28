@@ -1,206 +1,74 @@
-
-let tree;
-let pumpkin;
-let skeleton; 
-let leaves; 
 let grass; 
-let ground; 
-//img
-let pumpkintexture; 
-let treetexture; 
-let leavestexture; 
-let skelly;
+let bug;
+let snail;
+let grasshopper;
+let buzz;
+let circleX = 100; 
+let house;
+let decoration; 
 
 function preload(){
-  tree = loadModel('treetoptrunkex1.obj');
-  leaves = loadModel('leavesyep.obj')
-  pumpkin = loadModel('pumpkin.obj');
-  grass = loadModel('uploads_files_2616453_grass.obj');
-  ground = loadModel('untitled.obj');
-  tree1 = loadModel('tree (1).obj');
-  pumpkintexture = loadImage('Pumpkin_vcols.jpg');
-  treetexture = loadImage('bark.jpg'); 
-  leavestexture = loadImage('JA02_Leaf03Back_dif_au.png')
-  skelly = loadImage('giphy (8).gif')
-
+  song = loadSound('stranger-than-fiction-8383.mp3')
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight,WEBGL);
+  createCanvas(windowWidth, windowHeight);
+  grass = loadImage("grass-6110426_960_720.png"); 
+  bug = loadImage("bug.gif");
+  snail = loadImage("snail.gif");
+  grasshopper = loadImage("buggy.gif"); 
+  buzz = loadImage("buzz whoa.gif"); 
+  house = loadImage("giphy (5).gif");
+  decoration = loadImage("giphy (16).gif"); 
+  song.loop();
   
 }
 
-function draw() {
-  background(250, 166, 62);
-//let dirX = (mouseX / width - 0.5) * 2;
-  //let dirY = (mouseY / height - 0.5) * 2;
-  
-   var color1 = color(255, 204, 102);
-  var color2 = color(255, 0, 0);
-  
-  //directionalLight(250, 250, 250, -1);
-  noStroke()
+function mousePressed() {
+  if (song.isPlaying()) {
+    // .isPlaying() returns a boolean
+    song.pause(); // .play() will resume from .pause() position
+    background(255, 0, 0);
+  } else {
+    song.play();
+    background(0, 255, 0);
+  }
+}
 
-  //camera
-//	var x = map(mouseX, 0, width, -200, 200);
-//	var y = map(mouseY, 0, height, -200, 200);
-//	camera(0, 0, 200, x, y, 0, 0, 1, 0);
-		
+function draw() {
+  background(232, 140, 49);
+  noStroke()
+  
+  //house1
+  image(house,600,-150,650,650)
+  //grass
+  image(grass, 0,-650,windowWidth+800, windowHeight+800)
   
   //ground
-  push();
-  translate(0, 90, 200);
-  rotateY( frameCount * 0.01);
-  scale(50); 
-  fill(95, 125, 64);
-  model(ground)
-  pop();
   
-  //grass
-  push();
-  translate(0, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  fill(117, 95, 34)
+  rect(0,500,windowWidth+800, windowHeight+200)
   
-  push();
-  translate(190, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  //house2
+  image(house,-100,-350,950,950)
   
-  push();
-  translate(-190, 95, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  //decorations
+   for (var x = 0; x < width; x = x + random(500, 500)) {
+    image(decoration, -50 + x, 0, 500, 500);
+  }
   
-  push();
-  translate(200, 95, 400);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+ //ant
+  image(bug,200,400,250, 250)
   
-  push();
-  translate(-300, 95, 600);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(40); 
-  fill(69, 99, 63);
-  model(grass)
-  pop();
+  //grasshopper
   
-  //pumpkin
-  push();
-  translate(-20, 78, 200);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(100); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+  image(grasshopper, 800, 0, 700,700);
   
-  push();
-  translate(60, 76, 650);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(60); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+  //buzz
+  image(buzz,mouseX, mouseY)
   
-  push();
-  translate(-60, 76, 500);
-  rotateY(frameCount * 0.01);
-  rotateX(-2.95);
-  scale(130); 
-  //fill(69, 99, 63);
-  texture(pumpkintexture);
-  model(pumpkin)
-  pop();
+  //grassfront
+  image(grass, 0,-300,windowWidth+800, windowHeight+800)
   
-  //tree
-  
-  push();
-  translate(0, 95, 500);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(92, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
-  
-  //tree
-  
-  push();
-  translate(200, 95, 100);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(92, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
-
-  //tree
-  
-  push();
-  translate(-300,95, 2);
-  rotateY(frameCount * 0.01);
-  rotateX(-3.20);
-  scale(25000); 
-  //fill(69, 99, 63);
-  //texture(pumpkintexture);
-  //texture(tree);
-  fill(100, 61, 18);
-  model(tree)
-  texture(leavestexture)
-  model(leaves)
-  pop();
-  
-  //glowing lights
-  
-//translate(60, -50, 650);
-//push();
-//rotateZ(frameCount * 0.01);
-//rotateX(frameCount * 0.01);
-//rotateY(frameCount * 0.01);
-//emissiveMaterial(235, 255, 10);
-//sphere(5);
-//pop();
-  
-  //skelly
-  push();
-  translate(-40, 0, 390);
-//rotateZ(frameCount * 0.01);
-//rotateX(frameCount * 0.01);
-//rotateY(frameCount * 0.01);
-  texture(skelly)
-  plane(190)
-  pop();
-  
-  
+ 
 }
